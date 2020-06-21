@@ -13,9 +13,10 @@ Rscripts SCM.R
 .
 ├── README.md
 ├── plot
+│   ├── plot_gap.png
+│   ├── plot_placebo.png
 │   ├── plot_result.png
-│   ├── plot_timeseries.png
-│   └── plott_gap.png
+│   └── plot_timeseries.png
 └── scripts
     └── SCM.R
 ```
