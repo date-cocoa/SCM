@@ -160,7 +160,48 @@ plot_gap <- function(dataprep_out, synth_out, file_path = NULL, save = FALSE){
   }
 }
 
-# TO DO: summary satatistics
+plot_placebo <- function(data, file_path = NULL, save = FALSE){
+  ###
+  # plot results of placebo test
+  # input: 
+  #   data(dataframe): data
+  #   file_path(str): file path for saving plot (default = NULL)
+  #   save(bool): wheter to save or not (default = FALSE)
+  ###
+  
+  regions <- 
+    data$regionname %>% 
+    unique() %>% 
+    .[. != "Spain (Espana)" ]
+  
+  g <- ggplot()
+  for (region in regions){
+    dataprep_out <- 
+      make_dataprep(data = data,
+                    treatment_region = region)
+    synth_out <- synth(data.prep.obj = dataprep_out)
+    tmp <- tibble(
+      gap = c(dataprep_out$Y1plot - dataprep_out$Y0plot %*% synth_out$solution.w),
+      year = rep(1955:1997)
+    ) 
+  
+    if(region == 'Basque Country (Pais Vasco)'){
+       g <- g + geom_line(data = tmp, aes(x = year, y = gap), color = 'red')
+       } else{
+        g <- g + geom_line(data = tmp, aes(x = year, y = gap), alpha = 0.4)
+       }
+  }
+  
+  g <- g + ylim(-1.5, 1.5) + ggtitle('result of placebo test(red line is Basque)')
+  
+  if(save){
+    ggsave(filename = file_path, width = 11, height = 7)
+  } else{
+    print(g)
+  }
+}
+
+# TO DO: delete high MSPE
 
 ##### excution ####
 data('basque')
@@ -178,6 +219,6 @@ dataprep_out <-
 synth_out <- synth(data.prep.obj = dataprep_out) # search for W
 
 plot_results(dataprep_out = dataprep_out, synth_out = synth_out, file_path = '../plot/plot_result.png', save = TRUE)
-plot_gap(dataprep_out = dataprep_out, synth_out = synth_out, file_path = '../plot/plott_gap.png', save = TRUE)
-
+plot_gap(dataprep_out = dataprep_out, synth_out = synth_out, file_path = '../plot/plot_gap.png', save = TRUE)
+plot_placebo(data = data, file_path = '../plot/plot_placebo.png', save = TRUE)
 
