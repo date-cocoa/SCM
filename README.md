@@ -2,7 +2,7 @@
 Synthetic Control Methodで遊んでみる。
 
 ## 実行方法
-./SCM において以下を実行
+./SCM/scripts において以下を実行
 ```zsh
 Rscripts SCM.R
 ```

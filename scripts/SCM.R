@@ -168,7 +168,7 @@ data <- basque
 
 plot_timeseries(data = data, 
                 red_region = 'Basque Country (Pais Vasco)', 
-                file_path = './plot/plot_timeseries.png',
+                file_path = '../plot/plot_timeseries.png',
                 save = TRUE)
 
 dataprep_out <- 
@@ -177,7 +177,7 @@ dataprep_out <-
 
 synth_out <- synth(data.prep.obj = dataprep_out) # search for W
 
-plot_results(dataprep_out = dataprep_out, synth_out = synth_out, file_path = './plot/plot_result.png', save = TRUE)
-plot_gap(dataprep_out = dataprep_out, synth_out = synth_out, file_path = './plot/plott_gap.png', save = TRUE)
+plot_results(dataprep_out = dataprep_out, synth_out = synth_out, file_path = '../plot/plot_result.png', save = TRUE)
+plot_gap(dataprep_out = dataprep_out, synth_out = synth_out, file_path = '../plot/plott_gap.png', save = TRUE)
 
 
